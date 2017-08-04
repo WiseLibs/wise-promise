@@ -1,6 +1,6 @@
-'use strict'
-var Thenable = require('../tools/test/thenable')
-require('../tools/test/describe')('.finally', function (Promise, expect) {
+'use strict';
+var Thenable = require('../tools/thenable');
+require('../tools/describe')('.finally', function (Promise, expect) {
 	it('should return a new promise', function () {
 		var original = Promise.resolve()
 		var finallyed = original.finally()
@@ -61,7 +61,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 			Promise.resolve(555).finally(function () {
 				return Promise.reject(error)
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				done()
@@ -73,7 +73,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 			Promise.resolve(555).finally(function () {
 				return thenable = new Thenable({async: 50}).reject(error)
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				expect(thenable.isDone()).to.be.true
@@ -85,7 +85,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 			Promise.resolve(555).finally(function () {
 				throw error
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				done()
@@ -104,7 +104,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 			Promise.reject(error).finally(function () {
 				return 999
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				done()
@@ -121,7 +121,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 					}, 100)
 				})
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				expect(timedOut).to.be.true
@@ -134,7 +134,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 			Promise.reject(error).finally(function () {
 				return thenable = new Thenable({async: 50}).resolve('foo')
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				expect(thenable.isDone()).to.be.true
@@ -146,7 +146,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 			Promise.reject(new TypeError('bar')).finally(function () {
 				return Promise.reject(error)
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				done()
@@ -158,7 +158,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 			Promise.reject(new TypeError('bar')).finally(function () {
 				return thenable = new Thenable({async: 50}).reject(error)
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				expect(thenable.isDone()).to.be.true
@@ -170,7 +170,7 @@ require('../tools/test/describe')('.finally', function (Promise, expect) {
 			Promise.reject(new TypeError('bar')).finally(function () {
 				throw error
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				done()

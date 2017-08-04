@@ -1,5 +1,5 @@
 'use strict'
-require('../tools/test/describe')('.else', function (Promise, expect) {
+require('../tools/describe')('.else', function (Promise, expect) {
 	function alwaysTrue() {return true}
 	describe('should return a new promise', function () {
 		specify('when 0 arguments are supplied', function () {
@@ -106,7 +106,7 @@ require('../tools/test/describe')('.else', function (Promise, expect) {
 		return Promise.reject(obj)
 			.else(BlahError, 3)
 			.then(function () {
-				throw new Error('This promise should not have been fulfilled.')
+				throw new Error('This promise should not have been fulfilled')
 			}, function (reason) {
 				expect(reason).to.equal(obj)
 			})

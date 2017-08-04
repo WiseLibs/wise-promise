@@ -1,6 +1,6 @@
 'use strict'
-var testNonFunctions = require('../tools/test/test-non-functions')
-require('../tools/test/describe')('Promise.nodeify', function (Promise, expect) {
+var testNonFunctions = require('../tools/test-non-functions')
+require('../tools/describe')('Promise.nodeify', function (Promise, expect) {
 	if (!Promise.nodeify) {return}
 	function makeFunction(argCount, error, async) {
 		var args = []

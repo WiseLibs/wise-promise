@@ -1,6 +1,6 @@
 'use strict'
-var testNonFunctions = require('../tools/test/test-non-functions')
-require('../tools/test/describe')('Promise.promisify', function (Promise, expect) {
+var testNonFunctions = require('../tools/test-non-functions')
+require('../tools/describe')('Promise.promisify', function (Promise, expect) {
 	if (!Promise.promisify) {return}
 	function makeFunction(argCount, error, options, async) {
 		var args = []
@@ -93,7 +93,7 @@ require('../tools/test/describe')('Promise.promisify', function (Promise, expect
 		describe('error is 0', function () {
 			forManyStyles(0, function (fn) {
 				return fn(1, 2, 6, 88).then(function () {
-					throw new Error('This promise should have been rejected.')
+					throw new Error('This promise should have been rejected')
 				}, function (reason) {
 					expect(reason).to.equal(0)
 				})
@@ -102,7 +102,7 @@ require('../tools/test/describe')('Promise.promisify', function (Promise, expect
 		describe('error is ""', function () {
 			forManyStyles('', function (fn) {
 				return fn(1, 2, 6, 88).then(function () {
-					throw new Error('This promise should have been rejected.')
+					throw new Error('This promise should have been rejected')
 				}, function (reason) {
 					expect(reason).to.equal('')
 				})
@@ -133,7 +133,7 @@ require('../tools/test/describe')('Promise.promisify', function (Promise, expect
 		describe('throw "foo"', function () {
 			forManyCustomStyles({}, 'throw "foo"', function (fn) {
 				return fn(1, 2, 6, 88).then(function () {
-					throw new Error('This promise should have been rejected.')
+					throw new Error('This promise should have been rejected')
 				}, function (reason) {
 					expect(reason).to.equal('foo')
 				})
@@ -142,7 +142,7 @@ require('../tools/test/describe')('Promise.promisify', function (Promise, expect
 		describe('throw 0', function () {
 			forManyCustomStyles({}, 'throw 0', function (fn) {
 				return fn(1, 2, 6, 88).then(function () {
-					throw new Error('This promise should have been rejected.')
+					throw new Error('This promise should have been rejected')
 				}, function (reason) {
 					expect(reason).to.equal(0)
 				})

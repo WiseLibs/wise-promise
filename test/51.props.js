@@ -1,9 +1,8 @@
 'use strict'
-var ObjectTester = require('../tools/test/object-tester')
-var shallowEquals = require('../tools/test/object-shallow-equals')
-var toString = require('../tools/test/to-string')
-require('../tools/test/describe')('Promise.props', function (Promise, expect) {
-	var objectTester = new ObjectTester(Promise)
+var ObjectTester = require('../tools/object-tester')
+var shallowEquals = require('../tools/object-shallow-equals')
+var toString = require('../tools/to-string')
+require('../tools/describe')('Promise.props', function (Promise, expect) {
 	function expectToMatch(input, source) {
 		return expect(Promise.props(input)).to.eventually.satisfy(shallowEquals(source))
 	}
@@ -37,7 +36,7 @@ require('../tools/test/describe')('Promise.props', function (Promise, expect) {
 				configerable: false
 			},
 			bar: {
-				get: function () {throw new Error('Should not access non-enumerable properties.')},
+				get: function () {throw new Error('Should not access non-enumerable properties')},
 				enumerable: false,
 				configerable: false
 			}
@@ -77,11 +76,11 @@ require('../tools/test/describe')('Promise.props', function (Promise, expect) {
 		}
 	})
 	describe('should be fulfilled with an object of matching enumerable key-value pairs', function () {
-		var irrelevantPromise = Promise.reject(new Error('baz')).catchLater()
-		objectTester.test({foo: [irrelevantPromise], bar: 123}, expectToMatch)
+		var irrelevantPromise = Promise.reject(new Error('baz')).catchLater();
+		ObjectTester.test({foo: [irrelevantPromise], bar: 123}, expectToMatch)
 	})
 	describe('should not be affected by changing the input object after invocation', function () {
-		objectTester.test({foo: 'bar', '': 'baz'}, function (input, source) {
+		ObjectTester.test({foo: 'bar', '': 'baz'}, function (input, source) {
 			var ret = Promise.props(input)
 			input.foo = 'quux'
 			delete input['']
@@ -90,14 +89,14 @@ require('../tools/test/describe')('Promise.props', function (Promise, expect) {
 	})
 	describe('should be rejected with the rejection reason of a rejected promise', function () {
 		var err = new Error('baz')
-		objectTester.test({a: 123, b: Promise.reject(err)}, function (input, source) {
+		ObjectTester.test({a: 123, b: ObjectTester.reject(err)}, function (input, source) {
 			return expect(Promise.props(input)).to.be.rejectedWith(err)
 		})
 	})
 	describe('should be rejected by the earliest rejected promise', function () {
-		function shouldBeRejected() {throw new Error('This promise should have been rejected.')}
+		function shouldBeRejected() {throw new Error('This promise should have been rejected')}
 		var errors = {foo: new Error('baz'), bar: new Error('quux')}
-		objectTester.test({foo: Promise.reject(errors.foo), bar: Promise.reject(errors.bar)}, function (input, source, raceWinners) {
+		ObjectTester.test({foo: ObjectTester.reject(errors.foo), bar: ObjectTester.reject(errors.bar)}, function (input, source, raceWinners) {
 			return Promise.props(input).then(shouldBeRejected, function (reason) {
 				for (var i=0; i<raceWinners.length; i++) {
 					var key = raceWinners[i]
@@ -105,7 +104,7 @@ require('../tools/test/describe')('Promise.props', function (Promise, expect) {
 						return
 					}
 				}
-				throw new Error('None of the potential race winners were the rejection reason.')
+				throw new Error('None of the potential race winners were the rejection reason')
 			})
 		})
 	})

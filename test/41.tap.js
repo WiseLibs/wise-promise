@@ -1,6 +1,6 @@
 'use strict'
-var Thenable = require('../tools/test/thenable')
-require('../tools/test/describe')('.tap', function (Promise, expect) {
+var Thenable = require('../tools/thenable')
+require('../tools/describe')('.tap', function (Promise, expect) {
 	it('should return a new promise', function () {
 		var original = Promise.resolve()
 		var tapped = original.tap()
@@ -61,7 +61,7 @@ require('../tools/test/describe')('.tap', function (Promise, expect) {
 			Promise.resolve(555).tap(function () {
 				return Promise.reject(error)
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				done()
@@ -73,7 +73,7 @@ require('../tools/test/describe')('.tap', function (Promise, expect) {
 			Promise.resolve(555).tap(function () {
 				return thenable = new Thenable({async: 50}).reject(error)
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				expect(thenable.isDone()).to.be.true
@@ -85,7 +85,7 @@ require('../tools/test/describe')('.tap', function (Promise, expect) {
 			Promise.resolve(555).tap(function () {
 				throw error
 			}).then(function () {
-				done(new Error('This promise should have be rejected.'))
+				done(new Error('This promise should have be rejected'))
 			}, function (reason) {
 				expect(reason).to.equal(error)
 				done()
@@ -96,7 +96,7 @@ require('../tools/test/describe')('.tap', function (Promise, expect) {
 		it('should not invoke the callback', function (done) {
 			var error = new Error('foo')
 			Promise.reject(error).tap(function () {
-				done(new Error('This callback should not have been invoked.'))
+				done(new Error('This callback should not have been invoked'))
 			}).catch(function (reason) {
 				expect(reason).to.equal(error)
 				done()

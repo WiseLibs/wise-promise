@@ -1,5 +1,5 @@
 'use strict'
-require('../tools/test/describe')('.delay', function (Promise, expect) {
+require('../tools/describe')('.delay', function (Promise, expect) {
 	function delayTest(ms, minTime, maxTime) {
 		var p = Promise.resolve('foo')
 		var time = Date.now()

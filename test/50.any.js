@@ -1,10 +1,8 @@
 'use strict'
-var ArrayTester = require('../tools/test/array-tester')
-var makeIterable = require('../tools/test/make-iterable')
-var testNonIterables = require('../tools/test/test-non-iterables')
-require('../tools/test/describe')('Promise.any', function (Promise, expect) {
-	var arrayTester = new ArrayTester(Promise)
-	
+var ArrayTester = require('../tools/array-tester')
+var makeIterable = require('../tools/make-iterable')
+var testNonIterables = require('../tools/test-non-iterables')
+require('../tools/describe')('Promise.any', function (Promise, expect) {
 	it('should be rejected when given an empty array', function () {
 		return expect(Promise.any([])).to.be.rejected
 	})
@@ -26,13 +24,13 @@ require('../tools/test/describe')('Promise.any', function (Promise, expect) {
 		})
 	})
 	describe('should be fulfilled with the first fullfilled item', function () {
-		var irrelevantPromise = Promise.reject(new Error('baz')).catchLater()
-		arrayTester.test([[irrelevantPromise], 123], function (input, source, raceWinner) {
+		var irrelevantPromise = Promise.reject(new Error('baz')).catchLater();
+		ArrayTester.test([[irrelevantPromise], 123], function (input, source, raceWinner) {
 			return expect(Promise.any(input)).to.eventually.equal(source[raceWinner])
 		})
 	})
 	describe('should not be affected by changing the input array after invocation', function () {
-		arrayTester.test(['foo', ''], function (input, source, raceWinner) {
+		ArrayTester.test(['foo', ''], function (input, source, raceWinner) {
 			var ret = Promise.any(input)
 			input[0] = 'bar'
 			delete input[1]
@@ -41,7 +39,7 @@ require('../tools/test/describe')('Promise.any', function (Promise, expect) {
 		})
 	})
 	describe('should not be affected by changing the input iterable after invocation', function () {
-		arrayTester.test(['foo', ''], function (input, source, raceWinner) {
+		ArrayTester.test(['foo', ''], function (input, source, raceWinner) {
 			var ret = Promise.any(makeIterable(input))
 			input[0] = 'bar'
 			delete input[1]
@@ -50,15 +48,15 @@ require('../tools/test/describe')('Promise.any', function (Promise, expect) {
 		})
 	})
 	describe('should be resolved by the first fulfilled value or promise', function () {
-		var array = [Promise.reject(new Error('baz')), 123]
-		arrayTester.test(array, function (input, source, raceWinner) {
+		var array = [ArrayTester.reject(new Error('baz')), 123]
+		ArrayTester.test(array, function (input, source, raceWinner) {
 			return expect(Promise.any(input)).to.become(123)
 		})
 	})
 	describe('should be rejected with the first promise, if no promises fulfill', function () {
 		var errors = [new Error('foo'), new Error('baz')]
-		var array = [Promise.reject(errors[0]), Promise.reject(errors[1])]
-		arrayTester.test(array, function (input, source, raceWinner) {
+		var array = [ArrayTester.reject(errors[0]), ArrayTester.reject(errors[1])]
+		ArrayTester.test(array, function (input, source, raceWinner) {
 			return expect(Promise.any(input)).to.be.rejectedWith(errors[raceWinner])
 		})
 	})

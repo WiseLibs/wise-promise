@@ -1,5 +1,5 @@
-'use strict'
-var deepEql = require('deep-eql')
+'use strict';
+const deepEql = require('deep-eql');
 
 // This function factory produces functions that test whether their argument is
 // an array which is deeply equal to the array provided to the factory.
@@ -11,23 +11,22 @@ var deepEql = require('deep-eql')
 // equality (===) when comparing objects in the arrays. As long as the objects
 // look the same, they are considered equal.
 
-module.exports = function (a) {
-	return function (b) {
-		if (a === b || !(a instanceof Array) || !isBaseArray(b) || b.length !== a.length) {
-			// Promise.settle() never fulfills with the same array as the input.
-			// Promise.settle() always fulfills with base arrays.
-			return false
-		}
-		for (var i=0, len=a.length; i<len; i++) {
-			if (!(i in b)) {
-				// Promise.settle() fills deleted keys with undefined.
-				return false
-			}
-		}
-		return (i in b) === false && deepEql(a, b)
+module.exports = (a) => (b) => {
+	if (a === b || !(a instanceof Array) || !isBaseArray(b) || b.length !== a.length) {
+		// Promise.settle() never fulfills with the same array as the input.
+		// Promise.settle() always fulfills with base arrays.
+		return false;
 	}
-}
+	let i = 0;
+	for (let len = a.length; i < len; ++i) {
+		if (!(i in b)) {
+			// Promise.settle() fills deleted keys with undefined.
+			return false;
+		}
+	}
+	return (i in b) === false && deepEql(a, b);
+};
 
-function isBaseArray(arr) {
-	return arr instanceof Array && arr.__proto__ === Array.prototype
-}
+const isBaseArray = (arr) => {
+	return arr instanceof Array && Object.getPrototypeOf(arr) === Array.prototype;
+};

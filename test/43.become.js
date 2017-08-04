@@ -1,5 +1,5 @@
 'use strict'
-require('../tools/test/describe')('.become', function (Promise, expect) {
+require('../tools/describe')('.become', function (Promise, expect) {
 	it('should return a new promise', function () {
 		var p = Promise.resolve(5)
 		return expect(p.become()).to.be.an.instanceof(Promise).and.not.equal(p)

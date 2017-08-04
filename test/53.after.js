@@ -1,5 +1,5 @@
 'use strict'
-require('../tools/test/describe')('Promise.after', function (Promise, expect) {
+require('../tools/describe')('Promise.after', function (Promise, expect) {
 	function afterTest(passedValue, ms, minTime, maxTime) {
 		var p = Promise.after(ms, passedValue)
 		var time = Date.now()

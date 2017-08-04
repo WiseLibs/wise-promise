@@ -1,6 +1,6 @@
 'use strict'
-var toString = require('../tools/test/to-string')
-require('../tools/test/describe')('Promise.isPromise', function (Promise, expect) {
+var toString = require('../tools/to-string')
+require('../tools/describe')('Promise.isPromise', function (Promise, expect) {
 	function falseWhenGiven(value, string) {
 		specify('given: ' + (string || toString(value)), function () {
 			expect(Promise.isPromise(value)).to.be.false

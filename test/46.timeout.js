@@ -1,5 +1,5 @@
 'use strict'
-require('../tools/test/describe')('Promise.TimeoutError', function (Promise, expect) {
+require('../tools/describe')('Promise.TimeoutError', function (Promise, expect) {
 	it('should be a subclass of Error', function () {
 		expect(Promise.TimeoutError).to.be.a('function')
 		expect(Promise.TimeoutError.prototype).to.be.an.instanceof(Error)
@@ -15,7 +15,7 @@ require('../tools/test/describe')('Promise.TimeoutError', function (Promise, exp
 	})
 })
 
-require('../tools/test/describe')('.timeout', function (Promise, expect) {
+require('../tools/describe')('.timeout', function (Promise, expect) {
 	function eventualPromise(ms) {
 		return new Promise(function (res) {
 			setTimeout(function () {res('foo')}, ms)
@@ -135,7 +135,7 @@ require('../tools/test/describe')('.timeout', function (Promise, expect) {
 	})
 	describe('should respect the custom error argument', function () {
 		function shouldNotFulfill() {
-			throw new Error('This promise should have been rejected.')
+			throw new Error('This promise should have been rejected')
 		}
 		function shouldBeTimeoutErrorOf(str) {
 			return function (reason) {
@@ -146,11 +146,11 @@ require('../tools/test/describe')('.timeout', function (Promise, expect) {
 		describe('when argument is null or undefined, a default message should be used', function () {
 			specify('argument is undefined', function () {
 				return eventualPromise(100).timeout(NaN, undefined).then(shouldNotFulfill,
-					shouldBeTimeoutErrorOf('The operation timed out after 0ms.'))
+					shouldBeTimeoutErrorOf('The operation timed out after 0ms'))
 			})
 			specify('argument is null', function () {
 				return eventualPromise(100).timeout(9.4, null).then(shouldNotFulfill,
-					shouldBeTimeoutErrorOf('The operation timed out after 9ms.'))
+					shouldBeTimeoutErrorOf('The operation timed out after 9ms'))
 			})
 		})
 		describe('when argument is an instanceof Error, that error object should be used', function () {

@@ -1,5 +1,5 @@
 'use strict'
-require('../tools/test/describe')('.log', function (Promise, expect) {
+require('../tools/describe')('.log', function (Promise, expect) {
 	function hookConsole() {
 		var consoleLog = console.log
 		var wasInvoked = false
@@ -37,7 +37,7 @@ require('../tools/test/describe')('.log', function (Promise, expect) {
 		var success = (logged instanceof Promise) && original !== logged
 		return logged.finally(function () {
 			controller.cancel()
-			if (!success) {throw new Error('The method did not return a new promise.')}
+			if (!success) {throw new Error('The method did not return a new promise')}
 		})
 	})
 	describe('should log the rejection value without changing it', function () {
