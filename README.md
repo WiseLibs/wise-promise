@@ -17,8 +17,8 @@ npm install --save honest-promise
 ```js
 const Promise = require('honest-promise');
 
-const promise = new Promise((resolve, reject) => {
-  get('http://www.google.com', (err, res) => {
+const promise = new Promise(function (resolve, reject) {
+  get('http://www.google.com', function (err, res) {
     if (err) reject(err);
     else resolve(res);
   });
@@ -58,7 +58,7 @@ The `predicate` can be:
 - an `Error` class
   - example: `.catch(TypeError, func)`
 - a filter function
-  - example: `.catch((err) => err.statusCode === 404, func)`
+  - example: `.catch(function (err) {return err.statusCode === 404}, func)`
 - an array of accepted `predicates`
   - example: `.catch([TypeError, SyntaxError, is404], func)`
 
@@ -84,15 +84,15 @@ The opposite of [`.tap`](#taphandler---promise). The given `handler` will only b
 
 ### .become(*fulfilledValue*, [*rejectedValue*]) -> *promise*
 
-Sugar for `.then(() => fulfilledValue)`.
+Sugar for `.then(function () {return fulfilledValue})`.
 
 If a second argument is passed, it is equivilent to:
 
-`.then(() => fulfilledValue, () => rejectedValue)`.
+`.then(function () {return fulfilledValue}, function () {return rejectedValue})`.
 
 ### .else([*predicate*], *value*) -> *promise*
 
-Sugar for `.catch(() => value)`. This method is used for providing default values on a rejected promise chain. Predicates are supported, just like with the [`.catch`](#catchpredicate-onrejected---promise) method.
+Sugar for `.catch(function () {return value})`. This method is used for providing default values on a rejected promise chain. Predicates are supported, just like with the [`.catch`](#catchpredicate-onrejected---promise) method.
 
 ### .delay(*milliseconds*) -> *promise*
 
@@ -134,7 +134,7 @@ Non-promise values in the `iterable` are treated like already-fulfilled promises
 
 ```js
 Promise.all([Promise.resolve('a'), 'b', Promise.resolve('c')])
-  .then((results) => {
+  .then(function (results) {
     assert(results[0] === 'a')
     assert(results[1] === 'b')
     assert(results[2] === 'c')
@@ -155,7 +155,7 @@ Non-promise values in the `object` are treated like already-fulfilled promises.
 
 ```js
 Promise.props({ users: getUsers(), news: getNews() })
-  .then((results) => {
+  .then(function (results) {
     console.log(results.users)
     console.log(results.news)
   })
@@ -206,7 +206,7 @@ Takes a promise-returning `function`, and returns a new function that instead ac
 ```js
 const callbackAPI = Promise.nodeify(promiseAPI)
 
-callbackAPI('foo', 'bar', (err, result) => {
+callbackAPI('foo', 'bar', function (err, result) {
   // handle error or result here
 })
 ```
