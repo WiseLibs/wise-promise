@@ -1,8 +1,8 @@
 # honest-promise [![Build Status](https://travis-ci.org/JoshuaWise/honest-promise.svg?branch=master)](https://travis-ci.org/JoshuaWise/honest-promise)
 
-With nodejs v8.0.0 the performance of native promises have been significantly improved, eliminating the need for bloated promise libraries like [bluebird](https://github.com/petkaantonov/bluebird). Native promises are now safer and cleaner, becoming the modern best practice.
+Since nodejs v8.0.0 the performance of native promises were significantly improved, eliminating the need for bloated promise libraries like [bluebird](https://github.com/petkaantonov/bluebird). Native promises are now safer and cleaner, becoming the modern best practice.
 
-Unfortunately, native promises alone lack many powerful utilities that libraries like [bluebird](https://github.com/petkaantonov/bluebird) provide. `honest-promise` extends native promises to provide that same power.
+Unfortunately, native promises alone lack many powerful utilities that libraries like [bluebird](https://github.com/petkaantonov/bluebird) provide. `honest-promise` is a subclass of native promises, to provide that same power.
 
 ## Installation
 
