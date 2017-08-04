@@ -58,10 +58,8 @@ require('../tools/describe')('Promise.isPromise', function (Promise, expect) {
 		fn.then = {}
 		falseWhenGiven(fn, '(function () {}).then = {}')
 
-		if (typeof Symbol === 'function') {
-			falseWhenGiven(Symbol())
-			falseWhenGiven({ then: Symbol() }, '{ then: Symbol() }')
-		}
+		falseWhenGiven(Symbol())
+		falseWhenGiven({ then: Symbol() }, '{ then: Symbol() }')
 	})
 	describe('should return true when', function () {
 		var unnamedFunction = function () {}

@@ -1,8 +1,8 @@
 'use strict';
 require('../tools/describe')('.catch', function (Promise, expect) {
-	function shouldNotFulfill() {
+	const shouldNotFulfill = () => {
 		throw new Error('This promise should not have been fulfilled');
-	}
+	};
 	describe('should return a new promise', function () {
 		specify('when 0 arguments are supplied', function () {
 			const p = Promise.resolve(5);

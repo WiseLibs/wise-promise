@@ -33,5 +33,5 @@ const isObject = (obj) => {
 };
 
 const isBaseObject = (obj) => {
-	return isObject(obj) && obj.__proto__ === Object.prototype;
+	return isObject(obj) && Object.getPrototypeOf(obj) === Object.prototype;
 };

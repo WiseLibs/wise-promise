@@ -70,10 +70,10 @@ require('../tools/describe')('Promise.resolve', function (Promise, expect) {
 		return expect(result).to.eventually.equal(3);
 	})
 	describe('when given a foreign thenable, should be resolved by that thenable', function () {
-		function shouldNotFulfill() {
+		const shouldNotFulfill = () => {
 			throw new Error('This promise should not have been fulfilled');
-		}
-		function testThenable(thenableFactory) {
+		};
+		const testThenable = (thenableFactory) => {
 			specify('resolved', function () {
 				const p = Promise.resolve(thenableFactory(true));
 				expect(p).to.be.an.instanceof(Promise);
@@ -86,7 +86,7 @@ require('../tools/describe')('Promise.resolve', function (Promise, expect) {
 					expect(reason).to.equal(3);
 				});
 			});
-		}
+		};
 		
 		describe('synchronous foreign thenable', function () {
 			testThenable((fulfilled) => ({

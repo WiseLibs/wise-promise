@@ -20,9 +20,6 @@
 // 	})
 // 	it('should treat strings as iterables, if ES6 iterables are supported', function () {
 // 		var expectation = expect(Promise.settle('hello'))
-// 		if (typeof Symbol !== 'function' || !Symbol.iterator) {
-// 			return expectation.to.be.rejectedWith(TypeError)
-// 		}
 // 		return expectation.to.eventually.satisfy(deepEquals(['h', 'e', 'l', 'l', 'o'].map(descriptor)))
 // 	})
 // 	describe('should be rejected on invalid input', function () {

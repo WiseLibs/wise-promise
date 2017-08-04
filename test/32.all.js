@@ -4,9 +4,9 @@ const shallowEquals = require('../tools/shallow-equals');
 const makeIterable = require('../tools/make-iterable');
 const testNonIterables = require('../tools/test-non-iterables');
 require('../tools/describe')('Promise.all', function (Promise, expect) {
-	function expectToMatch(input, source) {
+	const expectToMatch = (input, source) => {
 		return expect(Promise.all(input)).to.eventually.satisfy(shallowEquals(source));
-	}
+	};
 	
 	it('should be fulfilled given an empty array', function () {
 		const array = [];

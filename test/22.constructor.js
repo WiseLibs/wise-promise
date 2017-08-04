@@ -46,7 +46,7 @@ require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 	
 	// Everything below is taken from, or inspired by https://github.com/petkaantonov/bluebird
 	
-	function createPendingPromise() {
+	const createPendingPromise = () => {
 		let resolve, reject;
 		const p = new Promise((a, b) => {
 			resolve = a;
@@ -55,8 +55,8 @@ require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 		p.resolve = resolve;
 		p.reject = reject;
 		return p;
-	}
-	function fulfills(value, test) {
+	};
+	const fulfills = (value, test) => {
 		specify('immediately-fulfilled', function () {
 			return test(new Promise((res) => {
 				res(value);
@@ -69,8 +69,8 @@ require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 				}, 1);
 			}));
 		});
-	}
-	function rejects(reason, test) {
+	};
+	const rejects = (reason, test) => {
 		specify('immediately-rejected', function () {
 			return test(new Promise((res, rej) => {
 				rej(reason);
@@ -83,8 +83,8 @@ require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 				}, 1);
 			}));
 		});
-	}
-	function testFulfilled(value, test) {
+	};
+	const testFulfilled = (value, test) => {
 		describe('immediate value', function () {
 			fulfills(value, test);
 		});
@@ -119,15 +119,15 @@ require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 				}
 			}, test);
 		});
-	}
-	function testRejected(reason, test) {
+	};
+	const testRejected = (reason, test) => {
 		describe('immediate reason', function () {
 			return rejects(reason, test);
 		});
-	}
-	function shouldNotFulfill() {
+	};
+	const shouldNotFulfill = () => {
 		throw new Error('This promise should not have been fulfilled');
-	}
+	};
 	
 	describe('resolves the promise with the given object value', function () {
 		const obj = {};

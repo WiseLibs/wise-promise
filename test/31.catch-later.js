@@ -1,6 +1,6 @@
 'use strict';
 require('../tools/describe')('.catchLater', function (Promise, expect) {
-	function hookUnhandledRejections(cb) {
+	const hookUnhandledRejections = (cb) => {
 		let isPending = true;
 		const hook = () => {
 			if (isPending) cb();
@@ -12,8 +12,8 @@ require('../tools/describe')('.catchLater', function (Promise, expect) {
 		};
 		process.on('unhandledRejection', hook);
 		return cancel;
-	}
-	function expectUnhandledRejection(done) {
+	};
+	const expectUnhandledRejection = (done) => {
 		const timer = setTimeout(() => {
 			cancel();
 			done(new Error('An unhandled rejection did not occur'));
@@ -22,8 +22,8 @@ require('../tools/describe')('.catchLater', function (Promise, expect) {
 			clearTimeout(timer);
 			done();
 		});
-	}
-	function expectAllRejectionsHandled(done, promise) {
+	};
+	const expectAllRejectionsHandled = (done, promise) => {
 		const timer = setTimeout(() => {
 			cancel();
 			promise.then(() => { done(new Error('The promise was not rejected')); }, () => { done(); });
@@ -32,8 +32,8 @@ require('../tools/describe')('.catchLater', function (Promise, expect) {
 			clearTimeout(timer);
 			done(new Error('An unhandled rejection occurred'));
 		});
-	}
-	function testPromises(test) {
+	};
+	const testPromises = (test) => {
 		specify('on a terminal promise', function (done) {
 			return test(done, Promise.reject(new Error('foo bar')));
 		});
@@ -47,7 +47,7 @@ require('../tools/describe')('.catchLater', function (Promise, expect) {
 				return Promise.reject(new Error('foo bar'));
 			}));
 		});
-	}
+	};
 
 	describe('when omitted, should log an error for unhandled rejections', function () {
 		testPromises((done, promise) => {
