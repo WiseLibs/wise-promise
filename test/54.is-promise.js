@@ -14,9 +14,9 @@ require('../tools/describe')('Promise.isPromise', function (Promise, expect) {
 
 	it('should throw when accessing .then throws', function () {
 		expect(function () {
-			Promise.isPromise({get then() {
+			Promise.isPromise({ get then() {
 				throw new RangeError('foo')
-			}})
+			} })
 		}).to.throw(RangeError)
 	})
 	describe('should return false when', function () {
@@ -32,12 +32,12 @@ require('../tools/describe')('Promise.isPromise', function (Promise, expect) {
 		falseWhenGiven({}, '{}')
 		falseWhenGiven([])
 		falseWhenGiven(function then() {})
-		falseWhenGiven({then: true}, '{then: true}')
-		falseWhenGiven({then: {name: 'then'}}, '{then: {name: "then"}}')
-		falseWhenGiven({then: Object.create(Function.prototype)}, '{then: Object.create(Function.prototype)}')
-		falseWhenGiven({Then: function () {}}, '{Then: function () {}}')
-		falseWhenGiven({THEN: function () {}}, '{THEN: function () {}}')
-		falseWhenGiven({"then ": function () {}}, '{"then ": function () {}}')
+		falseWhenGiven({ then: true }, '{ then: true }')
+		falseWhenGiven({ then: { name: 'then' } }, '{ then: { name: "then" } }')
+		falseWhenGiven({ then: Object.create(Function.prototype) }, '{ then: Object.create(Function.prototype) }')
+		falseWhenGiven({ Then: function () {} }, '{ Then: function () {} }')
+		falseWhenGiven({ THEN: function () {} }, '{ THEN: function () {} }')
+		falseWhenGiven({ "then ": function () {} }, '{ "then ": function () {} }')
 
 		specify('given: "foo" with String.prototype.then', function () {
 			var thenInString = 'then' in String.prototype
@@ -60,12 +60,12 @@ require('../tools/describe')('Promise.isPromise', function (Promise, expect) {
 
 		if (typeof Symbol === 'function') {
 			falseWhenGiven(Symbol())
-			falseWhenGiven({then: Symbol()}, '{then: Symbol()}')
+			falseWhenGiven({ then: Symbol() }, '{ then: Symbol() }')
 		}
 	})
 	describe('should return true when', function () {
 		var unnamedFunction = function () {}
-		trueWhenGiven({then: unnamedFunction}, '{then: function () {}}')
+		trueWhenGiven({ then: unnamedFunction }, '{ then: function () {} }')
 
 		var nullObject = Object.create(null)
 		nullObject.then = function () {}

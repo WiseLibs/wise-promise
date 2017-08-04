@@ -14,17 +14,17 @@ require('../tools/describe')('Promise.props', function (Promise, expect) {
 	it('should not treat arrays in a special way', function () {
 		var array = new Array(3)
 		array[1] = 'foo'
-		return expectToMatch(array, {1: 'foo'})
+		return expectToMatch(array, { 1: 'foo' })
 	})
 	it('should not treat functions in a special way', function () {
 		var fn = function () {}
 		fn.foo = 'bar'
-		return expectToMatch(fn, {foo: 'bar'})
+		return expectToMatch(fn, { foo: 'bar' })
 	})
 	it('should not treat null-prototype objects in a special way', function () {
 		var obj = Object.create(null)
 		obj.foo = 'bar'
-		return expectToMatch(obj, {foo: 'bar'})
+		return expectToMatch(obj, { foo: 'bar' })
 	})
 	it('should only access each enumerable key\'s value once', function () {
 		var obj = {}
@@ -42,7 +42,7 @@ require('../tools/describe')('Promise.props', function (Promise, expect) {
 			}
 		})
 		return Promise.props(obj).then(function (result) {
-			expect(result).to.satisfy(shallowEquals({foo: 3}))
+			expect(result).to.satisfy(shallowEquals({ foo: 3 }))
 			expect(fooValue).to.equal(4)
 		})
 	})
@@ -54,7 +54,7 @@ require('../tools/describe')('Promise.props', function (Promise, expect) {
 		Foo.prototype.__proto__ = Ignore.prototype
 		Foo.prototype.thud = 'also ignored'
 
-		return expectToMatch(new Foo, {bar: 'baz'})
+		return expectToMatch(new Foo, { bar: 'baz' })
 	})
 	describe('should be rejected on invalid input', function () {
 		function testInvalidInput(value) {
@@ -77,26 +77,26 @@ require('../tools/describe')('Promise.props', function (Promise, expect) {
 	})
 	describe('should be fulfilled with an object of matching enumerable key-value pairs', function () {
 		var irrelevantPromise = Promise.reject(new Error('baz')).catchLater();
-		ObjectTester.test({foo: [irrelevantPromise], bar: 123}, expectToMatch)
+		ObjectTester.test({ foo: [irrelevantPromise], bar: 123 }, expectToMatch)
 	})
 	describe('should not be affected by changing the input object after invocation', function () {
-		ObjectTester.test({foo: 'bar', '': 'baz'}, function (input, source) {
+		ObjectTester.test({ foo: 'bar', '': 'baz' }, function (input, source) {
 			var ret = Promise.props(input)
 			input.foo = 'quux'
 			delete input['']
-			return expect(ret).to.eventually.satisfy(shallowEquals({foo: 'bar', '': 'baz'}))
+			return expect(ret).to.eventually.satisfy(shallowEquals({ foo: 'bar', '': 'baz' }))
 		})
 	})
 	describe('should be rejected with the rejection reason of a rejected promise', function () {
 		var err = new Error('baz')
-		ObjectTester.test({a: 123, b: ObjectTester.reject(err)}, function (input, source) {
+		ObjectTester.test({ a: 123, b: ObjectTester.reject(err) }, function (input, source) {
 			return expect(Promise.props(input)).to.be.rejectedWith(err)
 		})
 	})
 	describe('should be rejected by the earliest rejected promise', function () {
 		function shouldBeRejected() {throw new Error('This promise should have been rejected')}
-		var errors = {foo: new Error('baz'), bar: new Error('quux')}
-		ObjectTester.test({foo: ObjectTester.reject(errors.foo), bar: ObjectTester.reject(errors.bar)}, function (input, source, raceWinners) {
+		var errors = { foo: new Error('baz'), bar: new Error('quux') }
+		ObjectTester.test({ foo: ObjectTester.reject(errors.foo), bar: ObjectTester.reject(errors.bar) }, function (input, source, raceWinners) {
 			return Promise.props(input).then(shouldBeRejected, function (reason) {
 				for (var i=0; i<raceWinners.length; i++) {
 					var key = raceWinners[i]

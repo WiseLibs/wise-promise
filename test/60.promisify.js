@@ -22,7 +22,7 @@ require('../tools/describe')('Promise.promisify', function (Promise, expect) {
 				return test(makeFunction(n, error, undefined, 1))
 			})
 			specify('length ' + n + ' (deoptimized)', function () {
-				return test(makeFunction(n, error, {deoptimize: true}))
+				return test(makeFunction(n, error, { deoptimize: true }))
 			})
 		})
 	}
@@ -37,7 +37,7 @@ require('../tools/describe')('Promise.promisify', function (Promise, expect) {
 				return test(makeCustomFunction(n, error, body, undefined))
 			})
 			specify('length ' + n + ' (deoptimized)', function () {
-				return test(makeCustomFunction(n, error, body, {deoptimize: true}))
+				return test(makeCustomFunction(n, error, body, { deoptimize: true }))
 			})
 		})
 	}
@@ -153,20 +153,20 @@ require('../tools/describe')('Promise.promisify', function (Promise, expect) {
 		it('should fulfill with an array of values', function () {
 			return expect(Promise.promisify(function (a, b, c, cb) {
 				cb(null, a + b + c, a - b - c, a, b, c)
-			}, {multiArgs: true})(5, 6, 8))
+			}, { multiArgs: true })(5, 6, 8))
 			.to.become([19, -9, 5, 6, 8])
 		})
 		it('should fulfill with an array of a single value', function () {
 			return expect(Promise.promisify(function (a, b, c, cb) {
 				cb(null, a + b + c)
-			}, {multiArgs: true})(5, 6, 8))
+			}, { multiArgs: true })(5, 6, 8))
 			.to.become([19])
 		})
 		it('should be rejected with an error', function () {
 			var err = new Error('foobar')
 			return expect(Promise.promisify(function (a, b, c, cb) {
 				cb(err, a + b + c, a - b - c, a, b, c)
-			}, {multiArgs: true})(5, 6, 8))
+			}, { multiArgs: true })(5, 6, 8))
 			.to.be.rejectedWith(err)
 		})
 	})

@@ -57,7 +57,7 @@ require('../tools/describe')('Promise.after', function (Promise, expect) {
 			return expect(afterTest('foo', '1.0e2', 90, 110)).to.become('foo')
 		})
 		specify('numeric objects', function () {
-			var obj = {valueOf: function () {return '1.0e2'}}
+			var obj = { valueOf: function () {return '1.0e2'} }
 			return expect(afterTest('foo', obj, 90, 110)).to.become('foo')
 		})
 	})
