@@ -1,26 +1,89 @@
 'use strict';
 const conditionalCatch = Symbol();
+const noException = Symbol();
+const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 class HonestPromise extends Promise {
 	
 	static any(iterable) {
-		
+		return new HonestPromise((resolve, reject) => {
+			if (iterable == null || typeof iterable[Symbol.iterator] !== 'function') {
+				throw new TypeError('Expected argument to be an iterable object');
+			}
+			let firstException = noException;
+			let pendings = 0;
+			const fail = (reason) => {
+				if (firstException === noException) firstException = reason;
+				if (--pendings === 0) reject(firstException);
+			};
+			for (const value of iterable) {
+				pendings += 1;
+				HonestPromise.resolve(value).then(resolve, fail);
+			}
+			pendings || reject(new RangeError('The iterable argument contained no items'));
+		});
 	}
 	
 	static props(obj) {
-		
+		return new HonestPromise((resolve, reject) => {
+			if (obj == null || (typeof obj !== 'object' && typeof obj !== 'function')) {
+				throw new TypeError('Expected argument to be an object');
+			}
+			let pendings = 0;
+			const result = {};
+			const resolveItem = (key) => (value) => {
+				result[key] = value;
+				if (--pendings === 0) resolve(result);
+			};
+			for (const key in obj) {
+				if (hasOwnProperty.call(obj, key)) {
+					const value = obj[key];
+					if (HonestPromise.isPromise(value)) {
+						pendings += 1;
+						HonestPromise.resolve(value).then(resolveItem(key), reject);
+					} else {
+						result[key] = value;
+					}
+				}
+			}
+			pendings || resolve(result);
+		});
 	}
 	
 	static settle(iterable) {
-		
+		return new HonestPromise((resolve) => {
+			if (iterable == null || typeof iterable[Symbol.iterator] !== 'function') {
+				throw new TypeError('Expected argument to be an iterable object');
+			}
+			let pendings = 0;
+			const result = [];
+			const resolveItem = (i) => (value) => {
+				result[i] = { state: 'fulfilled', value };
+				if (--pendings === 0) resolve(result);
+			};
+			const rejectItem = (i) => (reason) => {
+				result[i] = { state: 'rejected', reason };
+				if (--pendings === 0) resolve(result);
+			};
+			for (const value of iterable) {
+				HonestPromise.resolve(value).then(resolveItem(pendings), rejectItem(pendings));
+				pendings += 1;
+			}
+			pendings ? (result.length = pendings) : resolve(result);
+		});
 	}
 	
 	static after(ms, value) {
-		
+		if (HonestPromise.isPromise(value)) value.then(undefined, () => {});
+		return new HonestPromise((resolve) => {
+			setTimeout(() => resolve(value), ~~ms);
+		});
 	}
 	
 	static isPromise(value) {
-		
+		return value != null
+			&& (typeof value === 'object' || typeof value === 'function')
+			&& typeof value.then === 'function';
 	}
 	
 	static promisify(fn, options) {
@@ -62,7 +125,7 @@ class HonestPromise extends Promise {
 		});
 	}
 	
-	rollback(handler) {
+	tapError(handler) {
 		if (typeof handler !== 'function') return this.then();
 		return this.then(undefined, (reason) => {
 			const ret = handler();
