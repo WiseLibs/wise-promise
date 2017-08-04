@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 	const defaultThis = (function () { return this; }());
 	
