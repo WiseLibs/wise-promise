@@ -42,7 +42,7 @@ require('../tools/describe')('.timeout', function (Promise, expect) {
 				.to.be.rejectedWith(Promise.TimeoutError);
 		});
 	};
-
+	
 	it('should return a new promise', function () {
 		const original = Promise.resolve();
 		const timeouted = original.timeout();
