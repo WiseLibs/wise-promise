@@ -1,0 +1,26 @@
+{
+  "name": "honest-promise",
+  "version": "0.1.0",
+  "description": "A subclass of the native Promise, providing the utilities expected from popular promise libraries",
+  "main": "index.js",
+  "scripts": {
+    "test": "$(npm bin)/mocha --bail --timeout 1000 --slow 99999 -R dot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshuaWise/honest-promise.git"
+  },
+  "keywords": [
+    "promise",
+    "async",
+    "native",
+    "bluebird",
+    "A+"
+  ],
+  "author": "Joshua Wise <joshuathomaswise@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoshuaWise/honest-promise/issues"
+  },
+  "homepage": "https://github.com/JoshuaWise/honest-promise#readme"
+}
