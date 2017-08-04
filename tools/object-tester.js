@@ -68,7 +68,7 @@ exports.test = (source, test) => {
 		// through the same option.
 		for (const option of options) {
 			const extraTextCase = new Array(keys.length);
-			for (var i = 0; i < keys.length; ++i) {
+			for (let i = 0; i < keys.length; ++i) {
 				extraTextCase[i] = option;
 			}
 			permutations.push(extraTextCase);
@@ -77,7 +77,7 @@ exports.test = (source, test) => {
 	
 	permutations.forEach((options) => {
 		const context = new Context(source);
-		for (var i = 0, len = keys.length; i < len; ++i) {
+		for (let i = 0, len = keys.length; i < len; ++i) {
 			options[i].call(context, keys[i], i);
 		}
 		context.doTest(test, keys);

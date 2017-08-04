@@ -76,7 +76,7 @@ exports.test = (source, test) => {
 	
 	permutations.forEach((options) => {
 		const context = new Context(source);
-		for (var i = 0, len = source.length; i < len; ++i) {
+		for (let i = 0, len = source.length; i < len; ++i) {
 			options[i].call(context, i);
 		}
 		context.doTest(test);
