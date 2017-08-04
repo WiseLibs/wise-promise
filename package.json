@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/JoshuaWise/honest-promise/issues"
   },
-  "homepage": "https://github.com/JoshuaWise/honest-promise#readme"
+  "homepage": "https://github.com/JoshuaWise/honest-promise#readme",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^3.5.0",
+    "promises-aplus-tests": "^2.1.2"
+  }
 }
