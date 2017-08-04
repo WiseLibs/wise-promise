@@ -1,2 +1,3 @@
-# honest-promise
-A subclass of the native Promise, providing utilities common in popular promise libraries.
+# honest-promise [![Build Status](https://travis-ci.org/JoshuaWise/honest-promise.svg?branch=master)](https://travis-ci.org/JoshuaWise/honest-promise)
+
+Native nodejs promises extended with powerful functionality.

@@ -1,7 +1,7 @@
 {
   "name": "honest-promise",
   "version": "0.1.0",
-  "description": "A subclass of the native Promise, providing utilities common in popular promise libraries",
+  "description": "Native nodejs promises extended with powerful functionality",
   "main": "index.js",
   "scripts": {
     "test": "$(npm bin)/mocha --bail --timeout 1000 --slow 99999 -R dot"
