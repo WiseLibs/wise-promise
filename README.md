@@ -17,8 +17,8 @@ npm install --save honest-promise
 ```js
 const Promise = require('honest-promise');
 
-const promise = new Promise(function (resolve, reject) {
-  get('http://www.google.com', function (err, res) {
+const promise = new Promise((resolve, reject) => {
+  get('http://www.google.com', (err, res) => {
     if (err) reject(err);
     else resolve(res);
   });
