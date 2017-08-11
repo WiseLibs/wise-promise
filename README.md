@@ -1,3 +1,4 @@
+<a href="https://promisesaplus.com/"><img src="https://promisesaplus.com/assets/logo-small.png" align="right" /></a>
 # honest-promise [![Build Status](https://travis-ci.org/JoshuaWise/honest-promise.svg?branch=master)](https://travis-ci.org/JoshuaWise/honest-promise)
 
 This is a subclass of **native** Node.js promises.
