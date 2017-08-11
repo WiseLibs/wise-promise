@@ -1,6 +1,6 @@
 {
   "name": "honest-promise",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Native nodejs promises extended with powerful functionality",
   "main": "index.js",
   "scripts": {
