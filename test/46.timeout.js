@@ -18,10 +18,17 @@ require('../tools/describe')('Promise.TimeoutError', function (Promise, expect) 
 		expect(typeof error.stack).to.equal(typeof (Error('qux').stack));
 	});
 	it('should have the same property descriptors as a regular Error', function () {
+		const getOwnPropertyDescriptors = (obj) => {
+			const ret = {};
+			for (const key of Object.getOwnPropertyNames(obj).concat(Object.getOwnPropertySymbols(obj))) {
+				ret[key] = Object.getOwnPropertyDescriptor(obj, key);
+			}
+			return ret;
+		};
 		const aObject = Error('qux');
 		const bObject = Promise.TimeoutError('qux');
-		const a = Object.getOwnPropertyDescriptors(aObject);
-		const b = Object.getOwnPropertyDescriptors(bObject);
+		const a = getOwnPropertyDescriptors(aObject);
+		const b = getOwnPropertyDescriptors(bObject);
 		const aStack = a.stack.value.split('\n')[0];
 		const bStack = b.stack.value.split('\n')[0];
 		a.stack.value = '';
