@@ -29,8 +29,8 @@ require('../tools/describe')('Promise.TimeoutError', function (Promise, expect) 
 		const bObject = Promise.TimeoutError('qux');
 		const a = getOwnPropertyDescriptors(aObject);
 		const b = getOwnPropertyDescriptors(bObject);
-		const aStack = a.stack.value.split('\n')[0];
-		const bStack = b.stack.value.split('\n')[0];
+		const aStack = (a.stack.value || a.stack.get.call(aObject)).split('\n')[0];
+		const bStack = (b.stack.value || b.stack.get.call(bObject)).split('\n')[0];
 		a.stack.value = '';
 		b.stack.value = '';
 		expect(a).to.deep.equal(b);
