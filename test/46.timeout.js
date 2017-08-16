@@ -11,6 +11,26 @@ require('../tools/describe')('Promise.TimeoutError', function (Promise, expect) 
 		expect(error.name).to.equal('TimeoutError');
 		expect(typeof error.stack).to.equal(typeof (new Error('baz').stack));
 	});
+	it('should be callable as a function', function () {
+		const error = Promise.TimeoutError('foobarbaz');
+		expect(error.message).to.equal('foobarbaz');
+		expect(error.name).to.equal('TimeoutError');
+		expect(typeof error.stack).to.equal(typeof (Error('qux').stack));
+	});
+	it('should have the same property descriptors as a regular Error', function () {
+		const aObject = Error('qux');
+		const bObject = Promise.TimeoutError('qux');
+		const a = Object.getOwnPropertyDescriptors(aObject);
+		const b = Object.getOwnPropertyDescriptors(bObject);
+		const aStack = a.stack.value.split('\n')[0];
+		const bStack = b.stack.value.split('\n')[0];
+		a.stack.value = '';
+		b.stack.value = '';
+		expect(a).to.deep.equal(b);
+		expect(bStack.replace('TimeoutError', 'Error')).to.equal(aStack);
+		expect(aStack).to.equal(String(aObject));
+		expect(bStack).to.equal(String(bObject));
+	});
 });
 
 require('../tools/describe')('.timeout', function (Promise, expect) {
