@@ -1,5 +1,5 @@
 {
-  "name": "honest-promise",
+  "name": "wise-promise",
   "version": "1.0.7",
   "description": "Native nodejs promises extended with powerful functionality",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoshuaWise/honest-promise.git"
+    "url": "git+https://github.com/JoshuaWise/wise-promise.git"
   },
   "keywords": [
     "promise",
@@ -20,9 +20,9 @@
   "author": "Joshua Wise <joshuathomaswise@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoshuaWise/honest-promise/issues"
+    "url": "https://github.com/JoshuaWise/wise-promise/issues"
   },
-  "homepage": "https://github.com/JoshuaWise/honest-promise#readme",
+  "homepage": "https://github.com/JoshuaWise/wise-promise#readme",
   "devDependencies": {
     "chai": "^4.1.0",
     "chai-as-promised": "^7.1.1",

@@ -1,22 +1,22 @@
 <a href="https://promisesaplus.com/"><img src="https://promisesaplus.com/assets/logo-small.png" align="right" /></a>
-# honest-promise [![Build Status](https://travis-ci.org/JoshuaWise/honest-promise.svg?branch=master)](https://travis-ci.org/JoshuaWise/honest-promise)
+# wise-promise [![Build Status](https://travis-ci.org/JoshuaWise/wise-promise.svg?branch=master)](https://travis-ci.org/JoshuaWise/wise-promise)
 
 This is a subclass of **native** Node.js promises.
 
 Native promises saw a huge performance boost in Node.js v8.0.0, eliminating the need for bloated promise libraries like [bluebird](https://github.com/petkaantonov/bluebird). Native promises are now safer, cleaner, and have become the new best practice.
 
-Unfortunately, native promises alone lack many powerful utilities that libraries like [bluebird](https://github.com/petkaantonov/bluebird) provide. `honest-promise` extends native promises to provide that same power.
+Unfortunately, native promises alone lack many powerful utilities that libraries like [bluebird](https://github.com/petkaantonov/bluebird) provide. `wise-promise` extends native promises to provide that same power.
 
 ## Installation
 
 ```bash
-npm install --save honest-promise
+npm install --save wise-promise
 ```
 
 ## Usage
 
 ```js
-const Promise = require('honest-promise');
+const Promise = require('wise-promise');
 
 const promise = new Promise((resolve, reject) => {
   get('http://www.google.com', (err, res) => {
@@ -59,7 +59,7 @@ The `predicate` can be:
 - an `Error` class
   - example: `.catch(TypeError, func)`
 - a filter function
-  - example: `.catch(function (err) {return err.statusCode === 404}, func)`
+  - example: `.catch(err => err.statusCode === 404, func)`
 - an array of accepted `predicates`
   - example: `.catch([TypeError, SyntaxError, is404], func)`
 
@@ -85,15 +85,15 @@ The opposite of [`.tap`](#taphandler---promise). The given `handler` will only b
 
 ### .become(*fulfilledValue*, [*rejectedValue*]) -> *promise*
 
-Sugar for `.then(function () {return fulfilledValue})`.
+Sugar for `.then(() => fulfilledValue)`.
 
 If a second argument is passed, it is equivilent to:
 
-`.then(function () {return fulfilledValue}, function () {return rejectedValue})`.
+`.then(() => fulfilledValue, () => rejectedValue)`.
 
 ### .else([*predicate*], *value*) -> *promise*
 
-Sugar for `.catch(function () {return value})`. This method is used for providing default values on a rejected promise chain. Predicates are supported, just like with the [`.catch`](#catchpredicate-onrejected---promise) method.
+Sugar for `.catch(() => value)`. This method is used for providing default values on a rejected promise chain. Predicates are supported, just like with the [`.catch`](#catchpredicate-onrejected---promise) method.
 
 ### .delay(*milliseconds*) -> *promise*
 
@@ -214,4 +214,4 @@ callbackAPI('foo', 'bar', function (err, result) {
 
 ## License
 
-[MIT](https://github.com/JoshuaWise/honest-promise/blob/master/LICENSE)
+[MIT](https://github.com/JoshuaWise/wise-promise/blob/master/LICENSE)
