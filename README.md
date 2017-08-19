@@ -5,7 +5,7 @@ This is a subclass of **native** Node.js promises.
 
 Native promises saw a huge performance boost in Node.js v8.0.0, eliminating the need for bloated promise libraries like [bluebird](https://github.com/petkaantonov/bluebird). Native promises are now safer, cleaner, and have become the new best practice.
 
-Unfortunately, native promises alone lack many powerful utilities that libraries like [bluebird](https://github.com/petkaantonov/bluebird) provide.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `wise-promise` extends native promises to provide that same power.
+Unfortunately, native promises alone lack many powerful utilities that libraries like [bluebird](https://github.com/petkaantonov/bluebird) provide.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `wise-promise` extends native promises to provide that same power.
 
 ## Installation
 
