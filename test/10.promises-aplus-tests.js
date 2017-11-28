@@ -4,9 +4,10 @@ process.on('unhandledRejection', NOOP);
 process.on('rejectionHandled', NOOP);
 const tests = require('promises-aplus-tests');
 require('../tools/describe')('A+ tests', function (Promise) {
-	after(() => {
+	after(function () {
 		process.removeListener('unhandledRejection', NOOP);
 		process.removeListener('rejectionHandled', NOOP);
+		process.on('unhandledRejection', (err) => { throw err; });
 	});
 	tests.mocha({
 		deferred: () => {

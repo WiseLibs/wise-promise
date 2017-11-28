@@ -48,7 +48,14 @@ require('../tools/describe')('.catchLater', function (Promise, expect) {
 			}));
 		});
 	};
-
+	
+	before(function () {
+		process.removeAllListeners('unhandledRejection');
+	});
+	after(function () {
+		process.removeAllListeners('unhandledRejection');
+		process.on('unhandledRejection', (err) => { throw err; });
+	});
 	describe('when omitted, should log an error for unhandled rejections', function () {
 		testPromises((done, promise) => {
 			expectUnhandledRejection(done);
