@@ -87,9 +87,7 @@ The opposite of [`.tap`](#taphandler---promise). The given `handler` will only b
 
 Sugar for `.then(() => fulfilledValue)`.
 
-If a second argument is passed, it is equivilent to:
-
-`.then(() => fulfilledValue, () => rejectedValue)`.
+If a second argument is passed, it is equivilent to `.then(() => fulfilledValue, () => rejectedValue)`.
 
 ### .else([*predicate*], *value*) -> *promise*
 
