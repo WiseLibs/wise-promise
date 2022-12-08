@@ -212,4 +212,4 @@ callbackAPI('foo', 'bar', function (err, result) {
 
 ## License
 
-[MIT](https://github.com/JoshuaWise/wise-promise/blob/master/LICENSE)
+[MIT](https://github.com/WiseLibs/wise-promise/blob/master/LICENSE)
