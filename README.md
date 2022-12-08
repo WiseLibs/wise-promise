@@ -1,9 +1,9 @@
 <a href="https://promisesaplus.com/"><img src="https://promisesaplus.com/assets/logo-small.png" align="right" /></a>
 # wise-promise [![Build Status](https://travis-ci.org/JoshuaWise/wise-promise.svg?branch=master)](https://travis-ci.org/JoshuaWise/wise-promise)
 
-This is a subclass of **native** Node.js promises.
+This is a subclass of **native** promises.
 
-Native promises saw a huge performance boost in Node.js v8.0.0, eliminating the need for bloated promise libraries like [bluebird](https://github.com/petkaantonov/bluebird). Native promises are now safer, cleaner, and have become the new best practice.
+Native promises saw a huge performance boost in Node.js v8.0.0, eliminating the need for complex promise libraries like [bluebird](https://github.com/petkaantonov/bluebird). Native promises are now safer, cleaner, and have become the new best practice.
 
 Unfortunately, native promises alone lack many powerful utilities that libraries like [bluebird](https://github.com/petkaantonov/bluebird) provide. `wise-promise` extends native promises to provide that same power.
 

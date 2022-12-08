@@ -1,14 +1,14 @@
 {
   "name": "wise-promise",
   "version": "1.1.3",
-  "description": "Native nodejs promises extended with powerful functionality",
+  "description": "Native promises extended with powerful functionality",
   "main": "lib/index.js",
   "scripts": {
     "test": "$(npm bin)/mocha --bail --timeout 1000 --slow 99999 -R dot"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoshuaWise/wise-promise.git"
+    "url": "git+https://github.com/WiseLibs/wise-promise.git"
   },
   "keywords": [
     "promise",
@@ -20,9 +20,9 @@
   "author": "Joshua Wise <joshuathomaswise@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoshuaWise/wise-promise/issues"
+    "url": "https://github.com/WiseLibs/wise-promise/issues"
   },
-  "homepage": "https://github.com/JoshuaWise/wise-promise#readme",
+  "homepage": "https://github.com/WiseLibs/wise-promise#readme",
   "devDependencies": {
     "chai": "^4.1.0",
     "chai-as-promised": "^7.1.1",
