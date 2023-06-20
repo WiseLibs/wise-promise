@@ -11,7 +11,7 @@ require('../tools/describe')('Promise.isPromise', function (Promise, expect) {
 			expect(Promise.isPromise(value)).to.be.true;
 		});
 	};
-	
+
 	it('should throw when accessing .then throws', function () {
 		expect(() => {
 			Promise.isPromise({ get then() { throw new RangeError('foo'); } });
@@ -36,7 +36,7 @@ require('../tools/describe')('Promise.isPromise', function (Promise, expect) {
 		falseWhenGiven({ Then: () => {} }, '{ Then: () => {} }');
 		falseWhenGiven({ THEN: () => {} }, '{ THEN: () => {} }');
 		falseWhenGiven({ 'then ': () => {} }, '{ "then ": () => {} }');
-		
+
 		specify('given: "foo" with String.prototype.then', function () {
 			const thenInString = 'then' in String.prototype;
 			const originalStringThen = String.prototype.then;
@@ -51,22 +51,22 @@ require('../tools/describe')('Promise.isPromise', function (Promise, expect) {
 				}
 			}
 		});
-		
+
 		const fn = () => {};
 		fn.then = {};
 		falseWhenGiven(fn, '(() => {}).then = {}');
-		
+
 		falseWhenGiven(Symbol());
 		falseWhenGiven({ then: Symbol() }, '{ then: Symbol() }');
 	});
 	describe('should return true when', function () {
 		const unnamedFunction = () => {};
 		trueWhenGiven({ then: unnamedFunction }, '{ then: () => {} }');
-		
+
 		const nullObject = Object.create(null);
 		nullObject.then = () => {};
 		trueWhenGiven(nullObject, 'Object.create(null).then = () => {}');
-		
+
 		const fn = () => {};
 		fn.then = () => {};
 		trueWhenGiven(fn, '(() => {}).then = () => {}');

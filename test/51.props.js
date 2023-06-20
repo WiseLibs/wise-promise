@@ -6,7 +6,7 @@ require('../tools/describe')('Promise.props', function (Promise, expect) {
 	const expectToMatch = (input, source) => {
 		return expect(Promise.props(input)).to.eventually.satisfy(shallowEquals(source));
 	};
-	
+
 	it('should be fulfilled given an empty object', function () {
 		const obj = {};
 		return expectToMatch(obj, obj);

@@ -65,11 +65,11 @@ require('../tools/describe')('.timeout', function (Promise, expect) {
 			return expectation;
 		})
 		specify('settled too late', function () {
-			return expect(eventualPromise(15).timeout(ms))
+			return expect(eventualPromise(20).timeout(ms))
 				.to.be.rejectedWith(Promise.TimeoutError);
 		});
 	};
-	
+
 	it('should return a new promise', function () {
 		const original = Promise.resolve();
 		const timeouted = original.timeout();
@@ -78,11 +78,11 @@ require('../tools/describe')('.timeout', function (Promise, expect) {
 	});
 	describe('should reject with TimeoutError if not settled before the timeout', function () {
 		specify('fulfilled after the timeout', function () {
-			return expect(eventualPromise(115).timeout(100)).to.be.rejectedWith(Promise.TimeoutError);
+			return expect(eventualPromise(140).timeout(100)).to.be.rejectedWith(Promise.TimeoutError);
 		});
 		specify('rejected after the timeout', function () {
 			const promise = new Promise((res, rej) => {
-				setTimeout(() => rej(new Error), 115);
+				setTimeout(() => rej(new Error), 140);
 			});
 			return expect(promise.timeout(100)).to.be.rejectedWith(Promise.TimeoutError);
 		});
@@ -100,7 +100,7 @@ require('../tools/describe')('.timeout', function (Promise, expect) {
 		});
 		specify('fulfills eventually, before timeout', function () {
 			const promise = new Promise((res) => {
-				setTimeout(() => { res('foo'); }, 85);
+				setTimeout(() => { res('foo'); }, 70);
 			});
 			return expect(promise.timeout(100)).to.become('foo');
 		});
@@ -121,16 +121,16 @@ require('../tools/describe')('.timeout', function (Promise, expect) {
 		specify('rejects eventually, before timeout', function () {
 			const error = new Error;
 			const promise = new Promise((res, rej) => {
-				setTimeout(() => rej(error), 85);
+				setTimeout(() => rej(error), 70);
 			});
 			return expect(promise.timeout(100)).to.be.rejectedWith(error);
 		});
 	});
 	describe('should treat numeric strings as valid time values', function () {
-		testTimeout('1.0e2', 85, 115);
+		testTimeout('1.0e2', 80, 120);
 	});
 	describe('should treat number objects as valid time values', function () {
-		testTimeout({ valueOf: () => '1.0e2' }, 85, 115);
+		testTimeout({ valueOf: () => '1.0e2' }, 80, 120);
 	});
 	describe('should treat non-numeric or negative arguments as zero', function () {
 		describe('argument is null', function () {

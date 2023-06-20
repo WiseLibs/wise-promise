@@ -13,7 +13,7 @@ require('../tools/describe')('Promise.settle', function (Promise, expect) {
 	const getResult = (array) => {
 		return Promise.all(array.map(descriptor));
 	};
-	
+
 	it('should be fulfilled given an empty array', function () {
 		const array = [];
 		return expect(Promise.settle(array)).to.eventually.satisfy(deepEquals(array));

@@ -11,7 +11,7 @@ require('../tools/describe')('Promise.after', function (Promise, expect) {
 			throw reason;
 		});
 	};
-	
+
 	describe('should return a new promise', function () {
 		specify('when given no arguments', function () {
 			expect(Promise.after()).to.be.an.instanceof(Promise);

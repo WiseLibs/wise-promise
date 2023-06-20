@@ -10,7 +10,7 @@ module.exports = (test) => {
 			return test(value);
 		});
 	};
-	
+
 	testInput(undefined);
 	testInput(null);
 	testInput(0);

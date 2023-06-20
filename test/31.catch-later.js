@@ -48,7 +48,7 @@ require('../tools/describe')('.catchLater', function (Promise, expect) {
 			}));
 		});
 	};
-	
+
 	before(function () {
 		process.removeAllListeners('unhandledRejection');
 	});

@@ -87,14 +87,14 @@ require('../tools/describe')('Promise.resolve', function (Promise, expect) {
 				});
 			});
 		};
-		
+
 		describe('synchronous foreign thenable', function () {
 			testThenable((fulfilled) => ({
 				then: (onFulfilled, onRejected) =>
 					{ (fulfilled ? onFulfilled : onRejected)(3); }
 			}));
 		});
-		
+
 		describe('asynchronous foreign thenable', function () {
 			testThenable((fulfilled) => ({
 				then: (onFulfilled, onRejected) =>

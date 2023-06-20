@@ -7,7 +7,7 @@ require('../tools/describe')('Promise.all', function (Promise, expect) {
 	const expectToMatch = (input, source) => {
 		return expect(Promise.all(input)).to.eventually.satisfy(shallowEquals(source));
 	};
-	
+
 	it('should be fulfilled given an empty array', function () {
 		const array = [];
 		return expectToMatch(array, array);

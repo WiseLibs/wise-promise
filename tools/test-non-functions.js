@@ -10,7 +10,7 @@ module.exports = (test) => {
 			return test(value);
 		});
 	};
-	
+
 	testInput(undefined);
 	testInput(null);
 	testInput(0);
@@ -23,7 +23,7 @@ module.exports = (test) => {
 	testInput({});
 	testInput([]);
 	testInput(Symbol());
-	
+
 	const fakeFunction = Object.create(Function.prototype);
 	fakeFunction.toString = () => 'Object.create(Function.prototype)';
 	testInput(fakeFunction);

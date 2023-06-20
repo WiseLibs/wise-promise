@@ -16,13 +16,13 @@ const options = [
 		if (i in this.source) this.input[i] = valueOf(this.source[i]);
 		this.description[i] = 'value';
 	},
-	
+
 	// a settled promise of the value
 	function (i) {
 		this.input[i] = promiseOf(this.source[i]).catchLater();
 		this.description[i] = 'settled promise';
 	},
-	
+
 	// an eventually-settled promise of the value
 	function (i) {
 		this.input[i] = new Promise((res, rej) => {
@@ -34,14 +34,14 @@ const options = [
 		});
 		this.description[i] = 'eventual promise';
 	},
-	
+
 	// an already-settled foreign thenable object
 	function (i) {
 		const thenable = this.input[i] = new Thenable;
 		resolveWith(x => thenable.resolve(x), x => thenable.reject(x), this.source[i]);
 		this.description[i] = 'settled thenable';
 	},
-	
+
 	// an eventually-settled foreign thenable object
 	function (i) {
 		const thenable = this.input[i] = new Thenable;
@@ -59,7 +59,7 @@ const options = [
 // array items through different "options" (listed above).
 exports.test = (source, test) => {
 	let permutations = memo[source.length];
-	
+
 	if (!permutations) {
 		memo[source.length] = permutations = permutate(options, source.length);
 		// In addition to the standard permutations, we also want to have
@@ -73,7 +73,7 @@ exports.test = (source, test) => {
 			permutations.push(extraTextCase);
 		}
 	}
-	
+
 	permutations.forEach((options) => {
 		const context = new Context(source);
 		for (let i = 0, len = source.length; i < len; ++i) {
@@ -142,10 +142,10 @@ const getRaceWinner = (description) => {
 
 const permutate = (inputArr, resultLength) => {
 	const results = [];
-	
+
 	const permute = (arr, memo = []) => {
 		let cur;
-		
+
 		for (let i = 0; i < arr.length; ++i) {
 			cur = arr.splice(i, 1);
 			if (memo.length === resultLength - 1) {
@@ -154,9 +154,9 @@ const permutate = (inputArr, resultLength) => {
 			permute(arr.slice(), memo.concat(cur));
 			arr.splice(i, 0, cur[0]);
 		}
-		
+
 		return results;
 	};
-	
+
 	return permute(inputArr);
 };

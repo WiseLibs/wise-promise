@@ -10,19 +10,19 @@ const memo = {};
 // Each permutation of these options will be tested for a given source object.
 // These functions are invoked with a `this` value of a Context object.
 const options = [
-	
+
 	// the value itself
 	function (key, i) {
 		this.input[key] = valueOf(this.source[key]);
 		this.description[i] = 'value';
 	},
-	
+
 	// a settled promise of the value
 	function (key, i) {
 		this.input[key] = promiseOf(this.source[key]).catchLater();
 		this.description[i] = 'settled promise';
 	},
-	
+
 	// an eventually-settled promise of the value
 	function (key, i) {
 		this.input[key] = new Promise((res, rej) => {
@@ -34,14 +34,14 @@ const options = [
 		});
 		this.description[i] = 'eventual promise';
 	},
-	
+
 	// a foreign thenable object that synchronously delivers the value
 	function (key, i) {
 		const thenable = this.input[key] = new Thenable;
 		resolveWith(x => thenable.resolve(x), x => thenable.reject(x), this.source[key]);
 		this.description[i] = 'settled thenable';
 	},
-	
+
 	// a foreign thenable object that asynchronously delivers the value
 	function (key, i) {
 		const thenable = this.input[key] = new Thenable;
@@ -60,7 +60,7 @@ const options = [
 exports.test = (source, test) => {
 	const keys = Object.keys(source);
 	let permutations = memo[keys.length];
-	
+
 	if (!permutations) {
 		memo[keys.length] = permutations = permutate(options, keys.length)
 		// In addition to the standard permutations, we also want to have
@@ -74,7 +74,7 @@ exports.test = (source, test) => {
 			permutations.push(extraTextCase);
 		}
 	}
-	
+
 	permutations.forEach((options) => {
 		const context = new Context(source);
 		for (let i = 0, len = keys.length; i < len; ++i) {
@@ -153,10 +153,10 @@ const getRaceWinners = (description, keys) => {
 
 const permutate = (inputArr, resultLength) => {
 	const results = [];
-	
+
 	const permute = (arr, memo = []) => {
 		let cur;
-		
+
 		for (let i = 0; i < arr.length; ++i) {
 			cur = arr.splice(i, 1);
 			if (memo.length === resultLength - 1) {
@@ -165,9 +165,9 @@ const permutate = (inputArr, resultLength) => {
 			permute(arr.slice(), memo.concat(cur));
 			arr.splice(i, 0, cur[0]);
 		}
-		
+
 		return results;
 	};
-	
+
 	return permute(inputArr);
 };

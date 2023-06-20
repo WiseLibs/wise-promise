@@ -1,7 +1,7 @@
 'use strict';
 require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 	const defaultThis = (function () { return this; }());
-	
+
 	it('should throw on invalid input', function () {
 		expect(() => { new Promise(); }).to.throw(TypeError);
 		expect(() => { new Promise('foo'); }).to.throw(TypeError);
@@ -43,9 +43,9 @@ require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 			return expect(new Promise(() => { throw err; })).to.be.rejectedWith(err);
 		});
 	});
-	
+
 	// Everything below is taken from, or inspired by https://github.com/petkaantonov/bluebird
-	
+
 	const createPendingPromise = () => {
 		let resolve, reject;
 		const p = new Promise((a, b) => {
@@ -128,7 +128,7 @@ require('../tools/describe')('Promise.constructor', function (Promise, expect) {
 	const shouldNotFulfill = () => {
 		throw new Error('This promise should not have been fulfilled');
 	};
-	
+
 	describe('resolves the promise with the given object value', function () {
 		const obj = {};
 		testFulfilled(obj, (promise) => {

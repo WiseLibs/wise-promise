@@ -3,7 +3,7 @@ require('../tools/describe')('Promise.reject', function (Promise, expect) {
 	const shouldNotFulfill = () => {
 		throw new Error('This promise should not have been fulfilled');
 	};
-	
+
 	it('should be rejected with undefined (implicit)', function () {
 		return Promise.reject().then(shouldNotFulfill, (reason) => {
 			expect(reason).to.equal(undefined);

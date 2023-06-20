@@ -25,7 +25,7 @@ require('../tools/describe')('.log', function (Promise, expect) {
 		};
 		return { cancel, get };
 	};
-	
+
 	it('should return a new promise', function () {
 		const controller = hookConsole();
 		const original = Promise.resolve();
