@@ -1,5 +1,5 @@
 <a href="https://promisesaplus.com/"><img src="https://promisesaplus.com/assets/logo-small.png" align="right" /></a>
-# wise-promise [![Build Status](https://travis-ci.org/JoshuaWise/wise-promise.svg?branch=master)](https://travis-ci.org/JoshuaWise/wise-promise)
+# wise-promise [![test](https://github.com/WiseLibs/wise-promise/actions/workflows/test.yml/badge.svg)](https://github.com/WiseLibs/wise-promise/actions/workflows/test.yml)
 
 This is a subclass of **native** promises.
 

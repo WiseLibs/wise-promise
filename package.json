@@ -4,7 +4,7 @@
   "description": "Native promises extended with powerful functionality",
   "main": "lib/index.js",
   "scripts": {
-    "test": "$(npm bin)/mocha --bail --timeout 1000 --slow 99999 -R dot"
+    "test": "mocha --bail --timeout 1000 --slow 99999 -R dot"
   },
   "repository": {
     "type": "git",
